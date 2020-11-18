@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 import {createStackNavigator} from '@react-navigation/stack'
+
 import DetailRoomScreen from '../screens/DetailRoomScreen';
 import HomeScreen from '../screens/HomeScreen';
 

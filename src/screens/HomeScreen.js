@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity, ScrollView} from 'react-native';
 import {useTheme} from 'react-native-paper';
 
 import Carousel from 'react-native-snap-carousel';
@@ -109,7 +109,7 @@ const HomeScreen = ({navigation}) => {
     }
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <HeaderApp/>
             <View style={styles.body}>
                 <Carousel
@@ -152,9 +152,15 @@ const HomeScreen = ({navigation}) => {
                     </View>
                     <Text style={styles.topHotelImageTitle}>TOP PHÒNG ĐƯỢC BÌNH CHỌN</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.topHotelContainer}>
+                    <View style={styles.topHotelImageOpacity}>
+                        <Image style={styles.topHotelImage} source={require('../assets/images/resort1.png')}/>
+                    </View>
+                    <Text style={styles.topHotelImageTitle}>TOP PHÒNG ĐƯỢC BÌNH CHỌN</Text>
+                </TouchableOpacity>
             </View>
             
-        </View>
+        </ScrollView>
     )
 }
 

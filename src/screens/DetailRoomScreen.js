@@ -1,10 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { View, Text, Image, Button } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
-export default function DetailRoomScreen({route}) {
+import BookingRoomModal from './BookingRoomModal';
 
-    const {navigation} = route.params;
+export default function DetailRoomScreen({navigation}) {
+
+    const [isModalVisible, setModalVisible] = useState(false);
+  
+    const toggleModal = () => {
+        setModalVisible(!isModalVisible);
+        console.log(isModalVisible)
+    };
 
     const carouselHotelRoom =  [
         {
@@ -53,7 +60,8 @@ export default function DetailRoomScreen({route}) {
                 layout='stack'
                 loop
             />
-            <Button title="haha" onPress={() => navigation.navigate("Info")}/>
+            <Button title="haha" onPress={toggleModal}/>
+            <BookingRoomModal isModalVisible={isModalVisible} toggleModal={toggleModal} />
         </View>
     )
 }

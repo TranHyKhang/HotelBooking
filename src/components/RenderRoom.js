@@ -40,7 +40,7 @@ export default function RenderRoom({item, navigation}) {
         }
     })
     return (
-        <TouchableOpacity onPress={() => navigation.navigate('DetailRoom', {item, navigation})}>
+        <TouchableOpacity onPress={() => navigation.navigate('DetailRoom', {item})}>
             <View style={styles.container}>
                 <Image style={styles.image} source={item.roomImage}/>
                 <View style={styles.containerContent}>
