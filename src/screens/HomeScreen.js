@@ -36,20 +36,35 @@ const HomeScreen = ({navigation}) => {
         {
             roomName: 'phong 1',
             roomDes: 'Day la phong 1',
-            roomImage: require('../assets/images/resort1.png'),
-            roomPrice: '100.000vnd'
+            value: 'phong 1',
+            label: 'phong 1',
+            roomImage: [
+                require('../assets/images/room1-detail1.jpg'),
+                require('../assets/images/room1-detail2.png')
+            ],
+            roomPrice: 100000
         },
         {
-            roomName: 'phong 1',
-            roomDes: 'Day la phong 1',
-            roomImage: require('../assets/images/resort1.png'),
-            roomPrice: '100.000vnd'
+            roomName: 'phong 2',
+            roomDes: 'Day la phong 2',
+            value: 'phong 2',
+            label: 'phong 2',
+            roomImage: [
+                require('../assets/images/room2-detail1.jpg'),
+                require('../assets/images/room2-detail2.jpg'),                
+            ],
+            roomPrice: 200000
         },
         {
-            roomName: 'phong 1',
-            roomDes: 'Day la phong 1',
-            roomImage: require('../assets/images/resort1.png'),
-            roomPrice: '100.000vnd'
+            roomName: 'phong 3',
+            roomDes: 'Day la phong 3',
+            value: 'phong 3',
+            label: 'phong 3',
+            roomImage: [
+                require('../assets/images/room2-detail1.jpg'),
+                require('../assets/images/room2-detail2.jpg'),                
+            ],
+            roomPrice: 300000
         }
     ]
 
@@ -104,7 +119,7 @@ const HomeScreen = ({navigation}) => {
 
     function _renderItem2({item, index}) {
         return (
-            <RenderRoom item={item} navigation={navigation}/>
+            <RenderRoom item={item} navigation={navigation} carouselHotelRoom={carouselHotelRoom}/>
         )
     }
 

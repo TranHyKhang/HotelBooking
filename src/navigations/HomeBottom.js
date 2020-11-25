@@ -26,8 +26,9 @@ function HomeBottom() {
         initialRouteName="Home"
         tabBarOptions={{
             activeTintColor: colors.primary,
-            inactiveTintColor: 'black'
+            inactiveTintColor: 'black',
         }}
+        
     >
       <BottomTab.Screen
         name="Home"
@@ -37,7 +38,7 @@ function HomeBottom() {
           tabBarIcon: ({color}) => <Feather style={{marginTop: 20}} name="home" color={color} size={35} />,
         }}
       />
-      <BottomTab.Screen
+      {/* <BottomTab.Screen
         name="Search"
         component={SearchScreen}
         options={{
@@ -52,7 +53,7 @@ function HomeBottom() {
             tabBarIcon: ({color}) => <AntDesign style={{marginTop: 20}} name="pluscircleo" size={35} color={color}/>,
             tabBarLabel: () => <Text></Text>
         }}
-      />
+      /> */}
       <BottomTab.Screen
         name="Promotion"
         component={PromotionScreen}
