@@ -1,10 +1,12 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 
+import HeaderApp from '../components/HeaderApp';
+
 const NotiScreen = () => {
     return (
         <View>
-            <Text>NotiScreen</Text>
+            <HeaderApp/>
         </View>
     )
 }
