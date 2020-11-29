@@ -5,13 +5,10 @@ import {useTheme} from 'react-native-paper';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import HomeScreen from '../screens/HomeScreen';
 import InfoScreen from '../screens/InfoScreen';
-import PromotionScreen from '../screens/PromotionScreen';
-import SearchScreen from '../screens/SearchScreen';
-import BookingScreen from '../screens/BookingScreen';
 
 import HomeStack from './HomeStack';
+import PromotionStack from './PromotionStack';
 
 import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -38,25 +35,10 @@ function HomeBottom() {
           tabBarIcon: ({color}) => <Feather style={{marginTop: 20}} name="home" color={color} size={35} />,
         }}
       />
-      {/* <BottomTab.Screen
-        name="Search"
-        component={SearchScreen}
-        options={{
-            tabBarLabel: ({color}) => <Text style={{color: color}}></Text>,
-            tabBarIcon: ({color}) => <Ionicon style={{marginTop: 20}} name="search" size={35} color={color}/>
-        }}
-      />
-      <BottomTab.Screen
-        name="Booking"
-        component={BookingScreen}
-        options={{
-            tabBarIcon: ({color}) => <AntDesign style={{marginTop: 20}} name="pluscircleo" size={35} color={color}/>,
-            tabBarLabel: () => <Text></Text>
-        }}
-      /> */}
+     
       <BottomTab.Screen
         name="Promotion"
-        component={PromotionScreen}
+        component={PromotionStack}
         options={{
           tabBarLabel: ({color}) => <Text style={{color: color}}></Text>,
           tabBarIcon: ({color}) => (
@@ -77,3 +59,24 @@ function HomeBottom() {
 }
 
 export default HomeBottom;
+
+
+
+
+
+ {/* <BottomTab.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{
+            tabBarLabel: ({color}) => <Text style={{color: color}}></Text>,
+            tabBarIcon: ({color}) => <Ionicon style={{marginTop: 20}} name="search" size={35} color={color}/>
+        }}
+      />
+      <BottomTab.Screen
+        name="Booking"
+        component={BookingScreen}
+        options={{
+            tabBarIcon: ({color}) => <AntDesign style={{marginTop: 20}} name="pluscircleo" size={35} color={color}/>,
+            tabBarLabel: () => <Text></Text>
+        }}
+      /> */}

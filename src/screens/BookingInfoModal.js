@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import { ScrollView,View, Text, Button, TouchableOpacity } from 'react-native'
 import Modal from 'react-native-modal';
 import {useTheme} from 'react-native-paper';
+import DropdownPicker from 'react-native-dropdown-picker';
+
 import TextInputInfo from '../components/TextInputInfo';
 
 export default function BookingInfoModal({toggleModalInfo, isModalInfoVisible, toggleModalSuccess}) {
