@@ -42,11 +42,11 @@ export default function RenderRoom({item, navigation, carouselHotelRoom}) {
     return (
         <TouchableOpacity onPress={() => navigation.navigate('DetailRoom', {item, carouselHotelRoom})}>
             <View style={styles.container}>
-                <Image style={styles.image} source={item.roomImage[0]}/>
+                <Image style={styles.image} source={{uri: item.image[0].url}}/>
                 <View style={styles.containerContent}>
-                    <Text style={styles.roomName}>{item.roomName}</Text>
-                    <Text style={styles.roomDes}>{item.roomDes}</Text>
-                    <Text style={styles.roomPrice}>{item.roomPrice + " VNĐ"}</Text>
+                    <Text style={styles.roomName}>{item.name}</Text>
+                    <Text>{item.type}</Text>
+                    <Text style={styles.roomPrice}>{item.price + " VNĐ"}</Text>
                 </View> 
             </View>
         </TouchableOpacity>

@@ -24,13 +24,19 @@ export default function DetailRoomScreen({navigation, route}) {
     const toggleModalSuccess = () => {
         setIsModalSuccessVisible(!isModalSuccessVisible);
     }
+
+    const itemRoom = {
+        label: item.name,
+        value: item.name,
+        ...item
+      }
    
 
     const _renderItem = ({item, index}) => {
         return (
             <View>
                 <Image 
-                    source={item}
+                    source={{uri: item.url}}
                     style={{
                         height: 300
                     }}
@@ -44,7 +50,7 @@ export default function DetailRoomScreen({navigation, route}) {
         <View style={{backgroundColor: 'white', flex: 1}}>
             <Carousel
                 ref={(c) => {carousel = c;}}
-                data={item.roomImage}
+                data={item.image}
                 renderItem={_renderItem}
                 sliderWidth={400}
                 sliderHeight={300}
@@ -52,12 +58,13 @@ export default function DetailRoomScreen({navigation, route}) {
                 layout='stack'
                 loop
             />
+            <Button title="ok" onPress={() => console.log(carouselHotelRoom)}/>
             <Button title="haha" onPress={toggleModal}/>
             <BookingRoomModal 
                 isModalVisible={isModalVisible} 
                 toggleModal={toggleModal} 
                 toggleModalInfo={toggleModalInfo}
-                item={item} 
+                item={itemRoom} 
                 carouselHotelRoom={carouselHotelRoom}
             />
             <BookingInfoModal

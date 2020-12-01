@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, Text, Dimensions, TouchableOpacity, Image } from 'react-native';
 import Modal from 'react-native-modal';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -16,7 +16,7 @@ import RenderPayRoom from '../components/RenderPayRoom';
 const {width,height} = Dimensions.get('screen');
 
 export default function BookingRoomModal({isModalVisible, item, carouselHotelRoom, toggleModalInfo, toggleModal}) {
-  const [country, setCountry] = useState(item.label);
+  const [room, setRoom] = useState(item.name);
   const [dateCheckIn, setDateCheckIn] = useState(new Date(1598051730000));
   const [dateCheckOut, setDateChecOut] = useState(new Date(1598051730000));
   const [mode, setMode] = useState('date');
@@ -24,6 +24,11 @@ export default function BookingRoomModal({isModalVisible, item, carouselHotelRoo
   const [showCheckOut, setShowCheckOut] = useState(false);
   const {colors} = useTheme();
 
+  
+useEffect(() => {
+  console.log(item)
+  console.log(carouselHotelRoom)
+}, [])
 
   const onChangeTimeCheckIn = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -70,7 +75,7 @@ export default function BookingRoomModal({isModalVisible, item, carouselHotelRoo
             }}
           >
             <Image 
-              source={item.roomImage[0]} 
+              source={{uri: item.image[0].url}} 
               style={{
                 width: 50, 
                 height: 50, 
@@ -80,14 +85,14 @@ export default function BookingRoomModal({isModalVisible, item, carouselHotelRoo
             />
             <DropDownPicker
               items={carouselHotelRoom}
-              defaultValue={country}
+              defaultValue={room}
               containerStyle={{height: 40}}
               style={{backgroundColor: '#fafafa', width: 250, alignSelf: 'flex-end'}}
               itemStyle={{
                   justifyContent: 'flex-start'
               }}
               dropDownStyle={{backgroundColor: '#fafafa'}}
-              onChangeItem={item => setCountry(item.value)}
+              onChangeItem={item => setRoom(item.name)}
             />
           </View>
 

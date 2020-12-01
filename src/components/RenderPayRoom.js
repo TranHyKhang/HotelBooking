@@ -5,7 +5,7 @@ import {useTheme} from 'react-native-paper';
 
 export default function RenderPayRoom({item, dateCheckIn, dateCheckOut}) {
     const daysSpent = dateCheckOut.getDate() - dateCheckIn.getDate();
-    const total = item.roomPrice * daysSpent;
+    const total = item.price * daysSpent;
     const {colors} = useTheme();
 
     const styles = StyleSheet.create({
