@@ -14,12 +14,11 @@ const HomeScreen = ({navigation}) => {
     var carousel = 0;
 
     const [rooms, setRooms] = useState([]);
-
+    
     const getRoom = async () => {
        let rooms = await axios.get('https://vukhanghotel.herokuapp.com/rooms');
-       console.log(rooms)
-       setRooms(rooms.data)
-     
+       console.log(rooms);
+       setRooms(rooms.data);
     }
 
     useEffect(() => {
