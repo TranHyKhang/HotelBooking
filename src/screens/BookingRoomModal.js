@@ -162,7 +162,7 @@ useEffect(() => {
             dateCheckIn={dateCheckIn} 
             dateCheckOut={dateCheckOut}
           />
-
+ 
           <TouchableOpacity 
             style={{
               alignSelf: 'center', 

@@ -17,6 +17,7 @@ const HomeScreen = ({navigation}) => {
 
     const getRoom = async () => {
        let rooms = await axios.get('https://vukhanghotel.herokuapp.com/rooms');
+       console.log(rooms)
        setRooms(rooms.data)
      
     }
@@ -27,6 +28,7 @@ const HomeScreen = ({navigation}) => {
         // .then((data) => {console.log(data)})
         // .catch((e) => console.log(e))
         getRoom();
+        
     }, [])
 
     const carouselItem =  [
