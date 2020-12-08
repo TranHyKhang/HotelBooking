@@ -14,12 +14,11 @@ export default function RenderPromotion({item, navigation}) {
             paddingBottom: 25
         },
         promotionTitle: {
-            position: 'relative',
             alignSelf: 'flex-start',
-            left: 40,
             color: 'black',
             fontSize: 20,
-            marginBottom: 5
+            marginBottom: 5,
+            marginLeft: 20
         },
         promotionImage: {
             width: 360,
@@ -29,10 +28,10 @@ export default function RenderPromotion({item, navigation}) {
     })
     return (
         <View style={styles.container}>
-            <Text style={styles.promotionTitle}>{item.title}</Text>
+            <Text style={styles.promotionTitle}>{item.name}</Text>
             <View style={{borderRadius: 20}}>
                 <TouchableOpacity onPress={() => navigation.navigate('Detail', {item})}>
-                    <Image style={styles.promotionImage} source={item.image}/>
+                    <Image style={styles.promotionImage} source={{uri: item.image[0].url}}/>
                 </TouchableOpacity>
             </View>
         </View>

@@ -16,10 +16,10 @@ export default function CustomUserInfo({item}) {
         }
     })
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={item.doSomeThing}>
             <View style={styles.container}>
                 <View>
-                    <Entypo name="info"/>
+                    {/* <Entypo name="info"/> */}
                     <Text style={{fontSize: 18}}>{item.title}</Text>
                 </View>
                 <MaterialIcon style={{color: '#BBB'}} name="arrow-forward-ios" size={26}/>

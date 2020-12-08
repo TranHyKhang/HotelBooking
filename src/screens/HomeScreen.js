@@ -14,19 +14,24 @@ const HomeScreen = ({navigation}) => {
     var carousel = 0;
 
     const [rooms, setRooms] = useState([]);
+    const [promotions, setPromotions] = useState([]);
     
     const getRoom = async () => {
-       let rooms = await axios.get('https://vukhanghotel.herokuapp.com/rooms');
-       console.log(rooms);
+       let rooms = await axios.get('https://dreamerhotel.herokuapp.com/rooms');
+    //    console.log(rooms);
        setRooms(rooms.data);
     }
 
+    const getPromotion = async () => {
+        let promotions = await axios.get('https://dreamerhotel.herokuapp.com/promotions');
+        // console.log(promotions.data);
+        setPromotions(promotions.data);
+
+    }
+
     useEffect(() => {
-        // axios.get('https://vukhanghotel.herokuapp.com/rooms')
-        // .then(() => alert('GetOK'))
-        // .then((data) => {console.log(data)})
-        // .catch((e) => console.log(e))
         getRoom();
+        getPromotion();
         
     }, [])
 
@@ -95,7 +100,7 @@ const HomeScreen = ({navigation}) => {
         return (
           <View>
             <Image 
-                source={item.image} 
+                source={{uri: item.image[0].url}} 
                 style={{
                     borderRadius: 10,
                     height: 200,
@@ -111,7 +116,7 @@ const HomeScreen = ({navigation}) => {
 
     function _renderItem2({item, index}) {
         return (
-            <RenderRoom item={item} navigation={navigation} carouselHotelRoom={carouselHotelRoom}/>
+            <RenderRoom item={item} navigation={navigation} carouselHotelRoom={carouselHotelRoom} promotions={promotions}/>
         )
     }
 
@@ -122,7 +127,7 @@ const HomeScreen = ({navigation}) => {
             <View style={styles.body}>
                 <Carousel
                     ref={(c) => { carousel = c; }}
-                    data={carouselItem}
+                    data={promotions}
                     loop
                     autoplay={true}
                     renderItem={_renderItem1}
@@ -154,7 +159,7 @@ const HomeScreen = ({navigation}) => {
                         Đề xuất cho bạn
                     </Text>
                 </View>
-                <TouchableOpacity style={styles.topHotelContainer}>
+                <TouchableOpacity onPress={() => navigation.navigate('Category', {rooms})} style={styles.topHotelContainer}>
                     <View style={styles.topHotelImageOpacity}>
                         <Image style={styles.topHotelImage} source={require('../assets/images/resort1.png')}/>
                     </View>
@@ -176,39 +181,3 @@ const HomeScreen = ({navigation}) => {
 
 export default HomeScreen;
 
-
-//const carouselHotelRoom = [
-    //     {
-    //         roomName: 'phong 1',
-    //         roomDes: 'Day la phong 1',
-    //         value: 'phong 1',
-    //         label: 'phong 1',
-    //         roomImage: [
-    //             require('../assets/images/room1-detail1.jpg'),
-    //             require('../assets/images/room1-detail2.png')
-    //         ],
-    //         roomPrice: 100000
-    //     },
-    //     {
-    //         roomName: 'phong 2',
-    //         roomDes: 'Day la phong 2',
-    //         value: 'phong 2',
-    //         label: 'phong 2',
-    //         roomImage: [
-    //             require('../assets/images/room2-detail1.jpg'),
-    //             require('../assets/images/room2-detail2.jpg'),                
-    //         ],
-    //         roomPrice: 200000
-    //     },
-    //     {
-    //         roomName: 'phong 3',
-    //         roomDes: 'Day la phong 3',
-    //         value: 'phong 3',
-    //         label: 'phong 3',
-    //         roomImage: [
-    //             require('../assets/images/room2-detail1.jpg'),
-    //             require('../assets/images/room2-detail2.jpg'),                
-    //         ],
-    //         roomPrice: 300000
-    //     }
-    // ]

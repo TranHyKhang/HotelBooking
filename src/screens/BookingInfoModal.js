@@ -3,15 +3,46 @@ import { ScrollView,View, Text, Button, TouchableOpacity } from 'react-native'
 import Modal from 'react-native-modal';
 import {useTheme} from 'react-native-paper';
 import DropdownPicker from 'react-native-dropdown-picker';
+import NumericInput from 'react-native-numeric-input';
 
 import TextInputInfo from '../components/TextInputInfo';
 
-export default function BookingInfoModal({toggleModalInfo, isModalInfoVisible, toggleModalSuccess}) {
+export default function BookingInfoModal({
+    toggleModalInfo, 
+    isModalInfoVisible, 
+    toggleModalSuccess, 
+    toggleModal, 
+    _handleLoaiKhach,
+    _handleSoluongKhach,
+    _handleHaveInfo,
+    loaiKhach, 
+    soLuongKhach,
+    dateCheckIn
+}) {
     const [userName, setUserName] = useState('');
     const [userPhone, setUserPhone] = useState('');
     const [userCMND, setUserCMND] = useState('');
     const [userAddress, setUserAddress] = useState('');
+
     const {colors} = useTheme(); 
+
+    const cacLoaiKhach = [
+        {
+            label: 'National',
+            value: 'National'
+        }, 
+        {
+            label: 'International',
+            value: 'International'
+        }
+    ]
+
+    // _postReservation = async () => {
+
+    // }
+
+
+
     return (
         <View style={{flex: 1}}>
             <Modal
@@ -29,10 +60,42 @@ export default function BookingInfoModal({toggleModalInfo, isModalInfoVisible, t
                             <TextInputInfo lable={'SĐT'} value={userPhone} _handleText={setUserPhone}/>
                             <TextInputInfo lable={'CMND'} value={userCMND} _handleText={setUserCMND}/>
                             <TextInputInfo lable={'Địa chỉ'} value={userAddress} _handleText={setUserAddress}/>
+                            <View 
+                                style={{
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between'
+                                }}
+                            >
+                                <View>
+                                    <Text style={{color: 'white', fontSize: 18}}>Loại khách</Text>
+                                    <DropdownPicker
+                                        items={cacLoaiKhach}
+                                        defaultValue={loaiKhach}
+                                        containerStyle={{height: 40, width: 150}}
+                                        style={{
+                                            justifyContent: 'flex-start'
+                                        }}
+                                        dropDownStyle={{backgroundColor: '#fafafa'}}
+                                        onChangeItem={item => _handleLoaiKhach(item.value)}
+                                    />
+                                </View>
+                                <View>
+                                    <Text style={{color: 'white', fontSize: 18}}>Số lượng khách</Text>
+                                    <NumericInput
+                                        containerStyle={{backgroundColor: 'white'}}
+                                        value={soLuongKhach}
+                                        totalHeight={40}
+                                        onChange={(value) => _handleSoluongKhach(value)}
+                                    />
+                                </View>
+                            </View>
                             <TouchableOpacity 
                                 onPress={() => {
                                     toggleModalInfo();
-                                    toggleModalSuccess();
+                                    toggleModal();
+                                    _handleHaveInfo();
+                                   // _postReservation();
                                 }}
                                 style={{
                                     alignSelf: 'center', 

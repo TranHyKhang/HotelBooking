@@ -9,30 +9,34 @@ export default function DetailPromotionScreen({route}) {
     const styles = StyleSheet.create({
         container: {
             justifyContent:'center',
-            alignItems: 'flex-start'
+            alignItems: 'flex-start',
+            backgroundColor: 'white', 
+            flex: 1
         },
         image: {
             width: width,
             height: 230,
-            resizeMode: 'stretch'
+            resizeMode: 'stretch',
+            flex: 3.5
         },
         wrapContent: {
-            padding: 10
+            padding: 10,
+            flex: 6.5
         },  
         title: {
             color: colors.primary,
-            fontSize: 20
+            fontSize: 22,
         },
         des: {
-
+            fontSize: 18
         }
     })
     return (
         <View style={styles.container}>
-            <Image style={styles.image} source={item.image}/>
+            <Image style={styles.image} source={{uri: item.image[0].url}}/>
             <View style={styles.wrapContent}>
-                <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.des}>{item.text}</Text>
+                <Text style={styles.title}>{item.name}</Text>
+                <Text style={styles.des}>{item.note}</Text>
             </View> 
         </View>
     )

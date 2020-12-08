@@ -1,34 +1,16 @@
 import React, {useState} from 'react'
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
-import {useTheme} from 'react-native-paper';
+import { View, Text, Image, StyleSheet, Dimensions, Button } from 'react-native'
+import { useTheme} from 'react-native-paper';
 import DropdownPicker from 'react-native-dropdown-picker';
 
-export default function BookingPromotion({promotionItem}) {
+export default function BookingPromotion({promotions, _handleChoosePromotion}) {
     const {colors} = useTheme();
     const {width, height} = Dimensions.get('screen');
-    const [promotion, setPromotion] = useState();
-    const [choosePromtion, setChoosePromotion] = useState([{
-        image: require('../assets/images/Promo1.jpg'),
-        label: "Item 1",
-        value: "Text 1"
-    }]);
-    const mockPromotionItem = [
-        {
-            image: require('../assets/images/Promo1.jpg'),
-            label: "Item 1",
-            value: "Text 1"
-        },
-        {
-            image: require('../assets/images/Promo2.png'),
-            label: "Item 2",
-            value: "Text 2"
-        },
-        {
-            image: require('../assets/images/Promo3.jpg'),
-            label: "Item 3",
-            value: "Text 3"
-        }
-    ]; 
+    const [promotion, setPromotion] = useState(promotions[0]);
+    const [choosePromtion, setChoosePromotion] = useState([promotions[0]]);
+
+    
+
 
     const styles = StyleSheet.create({
         container: {
@@ -65,22 +47,23 @@ export default function BookingPromotion({promotionItem}) {
             <View style={styles.promotion_content}>
                 <Text style={styles.title}>Promotion:</Text>
                 <DropdownPicker
-                    items={mockPromotionItem}
-                    defaultValue={promotion}
+                    items={promotions}
+                    defaultValue={promotion.value}
                     containerStyle={{height: 40}}
                     style={{backgroundColor: '#fafafa', width: width/2}}
                     itemStyle={{
-                        justifyContent: 'flex-start'
+                        justifyContent: 'flex-start',
+                        zIndex: 2
                     }}
                     dropDownStyle={{backgroundColor: '#fafafa'}}
                     onChangeItem={item => {
-                        setPromotion(item.value);
-                        let arr = mockPromotionItem.filter(x => x.value === item.value);
-                        setChoosePromotion(arr);
+                        setPromotion(item);
+                        _handleChoosePromotion(item.value);
                     }}
                 />
             </View>
-            <Image source={choosePromtion[0].image} style={styles.image}/>
+
+            <Image source={{uri: promotion.image[0].url}} style={styles.image}/>
         </View>
     )
 }

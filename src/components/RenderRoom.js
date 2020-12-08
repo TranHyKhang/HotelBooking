@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native'
 import {useTheme} from 'react-native-paper'
 
-export default function RenderRoom({item, navigation, carouselHotelRoom}) {
+export default function RenderRoom({item, navigation, carouselHotelRoom, promotions}) {
     const {colors} = useTheme()
     const styles = StyleSheet.create({
         container: {
@@ -40,7 +40,7 @@ export default function RenderRoom({item, navigation, carouselHotelRoom}) {
         }
     })
     return (
-        <TouchableOpacity onPress={() => navigation.navigate('DetailRoom', {item, carouselHotelRoom})}>
+        <TouchableOpacity onPress={() => navigation.navigate('DetailRoom', {item, carouselHotelRoom, promotions})}>
             <View style={styles.container}>
                 <Image style={styles.image} source={{uri: item.image[0].url}}/>
                 <View style={styles.containerContent}>

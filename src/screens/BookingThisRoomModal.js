@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { View, Text, Dimensions, TouchableOpacity, Image } from 'react-native';
 import Modal from 'react-native-modal';
-import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {useTheme} from 'react-native-paper';
 
@@ -13,22 +12,64 @@ import RenderTime from '../components/RenderTime';
 import BookingPromotion from '../components/BookingPromotion';
 import RenderPayRoom from '../components/RenderPayRoom';
 
+// import API from '../api/API';
+
 const {width,height} = Dimensions.get('screen');
 
-export default function BookingRoomModal({isModalVisible, item, carouselHotelRoom, toggleModalInfo, toggleModal}) {
-  const [room, setRoom] = useState(item.name);
-  const [dateCheckIn, setDateCheckIn] = useState(new Date(1598051730000));
-  const [dateCheckOut, setDateChecOut] = useState(new Date(1598051730000));
+export default function BookingRoomModal({
+    isModalVisible, 
+    item, 
+    toggleModalInfo, 
+    toggleModalSuccess,
+    toggleModal,
+    promotions,
+    soLuongKhach,
+    loaiKhach,
+    haveInfo,
+    dateCheckIn,
+    dateCheckOut,
+    setDateChecOut,
+    setDateCheckIn
+    }) {
   const [mode, setMode] = useState('date');
   const [showCheckIn, setShowCheckIn] = useState(false);
   const [showCheckOut, setShowCheckOut] = useState(false);
+  const [total, setTotal] = useState(0);
+  
   const {colors} = useTheme();
 
+  const [choosePromotion, setChoosePromtion] = useState('');
   
-useEffect(() => {
-  console.log(item)
-  console.log(carouselHotelRoom)
-}, [])
+
+
+  const postApi = async() => {
+    const obj = {
+      "reservation_date": "2020-11-23",
+      "guest_name": "Vũ Đặng",
+      "guest_type": "National",
+      "guest_personal_id": "0772231233213",
+      "guest_address": "Landmark 81",
+      "list_detail_reservation":[
+          {
+          "deposit":10,
+          "room":"5fc38c3497e7d10017e0af2b"
+          }    
+      ],
+      "guest_id":"KH0001231233"
+  }
+  }
+
+  useEffect(() => {
+    console.log(total)
+  },[total])
+
+
+const clonePormotion = promotions.map(function(x) {
+    return {
+        label: x.name,
+        ...x
+    }
+})
 
   const onChangeTimeCheckIn = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -69,9 +110,11 @@ useEffect(() => {
           <View 
             style={{
               flexDirection: 'row', 
-              justifyContent: 'space-between',
-              padding: 20,
-              marginBottom: 5
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              padding: 10,
+              marginBottom: 5,
+              marginTop: 10
             }}
           >
             <Image 
@@ -83,17 +126,17 @@ useEffect(() => {
                 resizeMode: 'cover'
               }}
             />
-            <DropDownPicker
-              items={carouselHotelRoom}
-              defaultValue={room}
-              containerStyle={{height: 40}}
-              style={{backgroundColor: '#fafafa', width: 250, alignSelf: 'flex-end'}}
-              itemStyle={{
-                  justifyContent: 'flex-start'
-              }}
-              dropDownStyle={{backgroundColor: '#fafafa'}}
-              onChangeItem={item => setRoom(item.name)}
-            />
+            <View
+                style={{
+                    backgroundColor: '#EEE',
+                    padding: 15,
+                    borderRadius: 10,
+                    marginLeft: 20,
+                    flex: 1
+                }}
+            >
+                <Text>{item.name}</Text>
+            </View>
           </View>
 
           <View 
@@ -155,12 +198,19 @@ useEffect(() => {
             </View>
           </View>
 
-          <BookingPromotion/>
+          <BookingPromotion 
+            promotions={clonePormotion}
+            _handleChoosePromotion={(x) => setChoosePromtion(parseInt(x))}
+          />
 
           <RenderPayRoom 
             item={item} 
+            choosePromotion={choosePromotion}
             dateCheckIn={dateCheckIn} 
             dateCheckOut={dateCheckOut}
+            soLuongKhach={soLuongKhach}
+            loaiKhach={loaiKhach}
+            setTotala={(x) => setTotal(x)}
           />
  
           <TouchableOpacity 
@@ -174,8 +224,13 @@ useEffect(() => {
               borderRadius: 20
             }} 
             onPress={() => {
-              toggleModal();
-              toggleModalInfo();
+              if(haveInfo) {
+                toggleModal();
+                toggleModalSuccess();
+              } else {
+                toggleModal();
+                toggleModalInfo();
+              }
             }}
           >
             <Text style={{fontSize: 16,color: 'white'}}>ĐẶT NGAY</Text>

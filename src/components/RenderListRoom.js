@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-export default function BookingScreen() {
+export default function RenderListRoom({item}) {
     return (
         <View>
-            <Text>BookingScree </Text>
+            <Text>{item.name}</Text>
         </View>
     )
 }

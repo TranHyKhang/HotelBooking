@@ -9,6 +9,7 @@ import InfoScreen from '../screens/InfoScreen';
 
 import HomeStack from './HomeStack';
 import PromotionStack from './PromotionStack';
+import InfoStack from './InfoStack';
 
 import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -48,7 +49,7 @@ function HomeBottom() {
       />
       <BottomTab.Screen
         name="Info"
-        component={InfoScreen}
+        component={InfoStack}
         options={{
           tabBarLabel: ({color}) => <Text style={{color: color}}></Text>,
           tabBarIcon: ({color}) => <Ionicon style={{marginTop: 20}} name="person-circle-outline" color={color} size={35} />,

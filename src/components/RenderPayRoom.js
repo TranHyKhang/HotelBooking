@@ -1,11 +1,46 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import {useTheme} from 'react-native-paper';
 
 
-export default function RenderPayRoom({item, dateCheckIn, dateCheckOut}) {
+export default function RenderPayRoom({
+    item, 
+    dateCheckIn, 
+    dateCheckOut, 
+    choosePromotion,
+    soLuongKhach,
+    loaiKhach,
+    setTotala
+}) {
+    
     const daysSpent = dateCheckOut.getDate() - dateCheckIn.getDate();
-    const total = item.price * daysSpent;
+    // let total =  (parseInt(item.price) * daysSpent) - choosePromotion + ((parseInt(item.price) * daysSpent) * 0.25)
+    let total
+
+
+    switch(loaiKhach) {
+        case 'National':
+            if(soLuongKhach === 3 ) {
+                total = (parseInt(item.price) * daysSpent) - choosePromotion + ((parseInt(item.price) * daysSpent) * 0.25);
+                setTotala(total);
+            } else {
+                total = (parseInt(item.price) * daysSpent) - choosePromotion;
+                setTotala(total);
+            }
+            break;
+        case 'International':
+            if(soLuongKhach === 3 ) {
+                total = ((parseInt(item.price) * daysSpent) - choosePromotion + ((parseInt(item.price) * daysSpent) * 0.25)) * 1.5;
+                setTotala(total);
+            } else {
+                total = ((parseInt(item.price) * daysSpent) - choosePromotion) * 1.5;
+                setTotala(total);
+
+            }
+            break;
+    }
+    
+    
     const {colors} = useTheme();
 
     const styles = StyleSheet.create({

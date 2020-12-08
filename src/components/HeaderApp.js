@@ -12,7 +12,9 @@ export default function HeaderApp() {
         },
         appName: {
             padding: 18,
-            fontSize: 24
+            fontSize: 24,
+            color: 'white',
+            fontWeight: 'bold'
         }   
     })
     return (

@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-export default function SearchScreen() {
+export default function BookingHistory() {
     return (
         <View>
-            <Text>Search</Text>
+            <Text>haha</Text>
         </View>
     )
 }
