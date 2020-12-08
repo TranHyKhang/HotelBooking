@@ -20,6 +20,7 @@ export default function DetailRoomScreen({navigation, route}) {
     const [haveInfo, setHaveInfo] = useState(false);
     const [dateCheckIn, setDateCheckIn] = useState(new Date(1598051730000));
   const [dateCheckOut, setDateChecOut] = useState(new Date(1598051730000));
+  const [reservationId, setReservationId] = useState("");
     
   
     const toggleModal = () => {
@@ -128,7 +129,7 @@ export default function DetailRoomScreen({navigation, route}) {
                     </Text>
                 </View>
             </TouchableOpacity>
-            <Button title="haha" onPress={() => console.log(item)}/>
+            <Button title="haha" onPress={() => console.log(reservationId)}/>
             <BookingThisRoomModal 
                 isModalVisible={isModalVisible} 
                 toggleModal={toggleModal} 
@@ -144,6 +145,7 @@ export default function DetailRoomScreen({navigation, route}) {
                 dateCheckOut={dateCheckOut}
                 setDateChecOut={(x) => setDateChecOut(x)}
                 setDateCheckIn={(x) => setDateCheckIn(x)}
+                reservationId={reservationId}
             />
             <BookingInfoModal
                 isModalInfoVisible={isModalInfoVisible}
@@ -156,6 +158,8 @@ export default function DetailRoomScreen({navigation, route}) {
                 _handleSoluongKhach={(x) => setSoluongKhach(x)}
                 _handleHaveInfo={() => setHaveInfo(true)}
                 dateCheckIn={dateCheckIn}
+                item={item}
+                setReservationId={setReservationId}
             />
             <BookingSuccessModal
                 isModalSuccessVisible={isModalSuccessVisible}

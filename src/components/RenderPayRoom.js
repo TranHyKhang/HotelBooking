@@ -12,8 +12,9 @@ export default function RenderPayRoom({
     loaiKhach,
     setTotala
 }) {
+
     
-    const daysSpent = dateCheckOut.getDate() - dateCheckIn.getDate();
+    const daysSpent = parseInt((dateCheckOut - dateCheckIn)/(24*3000*1000));
     // let total =  (parseInt(item.price) * daysSpent) - choosePromotion + ((parseInt(item.price) * daysSpent) * 0.25)
     let total
 

@@ -11,6 +11,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import RenderTime from '../components/RenderTime';
 import BookingPromotion from '../components/BookingPromotion';
 import RenderPayRoom from '../components/RenderPayRoom';
+import Axios from 'axios';
 
 // import API from '../api/API';
 
@@ -29,7 +30,8 @@ export default function BookingRoomModal({
     dateCheckIn,
     dateCheckOut,
     setDateChecOut,
-    setDateCheckIn
+    setDateCheckIn,
+    reservationId
     }) {
   const [mode, setMode] = useState('date');
   const [showCheckIn, setShowCheckIn] = useState(false);
@@ -44,24 +46,14 @@ export default function BookingRoomModal({
 
   const postApi = async() => {
     const obj = {
-      "reservation_date": "2020-11-23",
-      "guest_name": "Vũ Đặng",
-      "guest_type": "National",
-      "guest_personal_id": "0772231233213",
-      "guest_address": "Landmark 81",
-      "list_detail_reservation":[
-          {
-          "deposit":10,
-          "room":"5fc38c3497e7d10017e0af2b"
-          }    
-      ],
-      "guest_id":"KH0001231233"
-  }
+      "payment_date": dateCheckOut,
+      "total": total,
+      "reservation": reservationId
+    } 
+
+    await Axios.post('https://dreamerhotel.herokuapp.com/payments', obj);
   }
 
-  useEffect(() => {
-    console.log(total)
-  },[total])
 
 
 const clonePormotion = promotions.map(function(x) {
@@ -227,6 +219,7 @@ const clonePormotion = promotions.map(function(x) {
               if(haveInfo) {
                 toggleModal();
                 toggleModalSuccess();
+                postApi();
               } else {
                 toggleModal();
                 toggleModalInfo();

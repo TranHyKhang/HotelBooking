@@ -4,6 +4,7 @@ import Modal from 'react-native-modal';
 import {useTheme} from 'react-native-paper';
 import DropdownPicker from 'react-native-dropdown-picker';
 import NumericInput from 'react-native-numeric-input';
+import axios from 'axios';
 
 import TextInputInfo from '../components/TextInputInfo';
 
@@ -17,7 +18,9 @@ export default function BookingInfoModal({
     _handleHaveInfo,
     loaiKhach, 
     soLuongKhach,
-    dateCheckIn
+    dateCheckIn,
+    item,
+    setReservationId
 }) {
     const [userName, setUserName] = useState('');
     const [userPhone, setUserPhone] = useState('');
@@ -37,9 +40,30 @@ export default function BookingInfoModal({
         }
     ]
 
-    // _postReservation = async () => {
+    const userID = () => {
+        return "KH" + (Math.floor(Math.random() * 1000000) + 1);
+    }
 
-    // }
+    const _postReservation = async () => {
+        const obj = {
+            "reservation_date": dateCheckIn,
+            "guest_name": userName,
+            "guest_type": loaiKhach,
+            "guest_personal_id": userCMND,
+            "guest_address": userAddress,
+            "list_detail_reservation":[
+                {
+                "deposit":10,
+                "room":item.id
+                }    
+            ],
+            "guest_id": userID()
+        }
+        console.log(obj);
+        let data = await axios.post("https://dreamerhotel.herokuapp.com/reservations", obj);
+        setReservationId(data.data.id);
+        
+    }
 
 
 
@@ -95,7 +119,7 @@ export default function BookingInfoModal({
                                     toggleModalInfo();
                                     toggleModal();
                                     _handleHaveInfo();
-                                   // _postReservation();
+                                   _postReservation();
                                 }}
                                 style={{
                                     alignSelf: 'center', 
