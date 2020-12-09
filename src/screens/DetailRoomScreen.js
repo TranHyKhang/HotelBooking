@@ -10,7 +10,7 @@ import BookingSuccessModal from './BookingSuccessModal';
 
 export default function DetailRoomScreen({navigation, route}) {
     const {colors} = useTheme();
-    const {item, carouselHotelRoom, promotions} = route.params; 
+    const {item, promotions} = route.params; 
     const [isModalVisible, setModalVisible] = useState(false);
     const [isModalInfoVisible, setIsModalInfoVisible] = useState(false);
     const [isModalSuccessVisible, setIsModalSuccessVisible] = useState(false);
@@ -86,7 +86,7 @@ export default function DetailRoomScreen({navigation, route}) {
                 layout='stack'
                 loop
             />
-            <TouchableOpacity style={styles.icon1} onPress={() => navigation.navigate('Home')}>
+            <TouchableOpacity style={styles.icon1} onPress={() => navigation.goBack()}>
                 <Ionicon name="arrow-back" size={30} style={styles.icon}/>
             </TouchableOpacity>
             <View style={{position: 'relative', top: -45, padding: 15}}>
@@ -129,14 +129,12 @@ export default function DetailRoomScreen({navigation, route}) {
                     </Text>
                 </View>
             </TouchableOpacity>
-            <Button title="haha" onPress={() => console.log(reservationId)}/>
             <BookingThisRoomModal 
                 isModalVisible={isModalVisible} 
                 toggleModal={toggleModal} 
                 toggleModalInfo={toggleModalInfo}
                 toggleModalSuccess={toggleModalSuccess}
                 item={itemRoom} 
-                carouselHotelRoom={carouselHotelRoom}
                 promotions={promotions}
                 soLuongKhach={soLuongKhach}
                 loaiKhach={loaiKhach}

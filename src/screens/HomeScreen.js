@@ -159,18 +159,13 @@ const HomeScreen = ({navigation}) => {
                         Đề xuất cho bạn
                     </Text>
                 </View>
-                <TouchableOpacity onPress={() => navigation.navigate('Category', {rooms})} style={styles.topHotelContainer}>
+                <TouchableOpacity onPress={() => navigation.navigate('Category', {rooms, promotions, navigation})} style={styles.topHotelContainer}>
                     <View style={styles.topHotelImageOpacity}>
                         <Image style={styles.topHotelImage} source={require('../assets/images/resort1.png')}/>
                     </View>
                     <Text style={styles.topHotelImageTitle}>TOP PHÒNG ĐƯỢC BÌNH CHỌN</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.topHotelContainer}>
-                    <View style={styles.topHotelImageOpacity}>
-                        <Image style={styles.topHotelImage} source={require('../assets/images/resort1.png')}/>
-                    </View>
-                    <Text style={styles.topHotelImageTitle}>TOP PHÒNG ĐƯỢC BÌNH CHỌN</Text>
-                </TouchableOpacity>
+                
             </View>
             
         </ScrollView>
