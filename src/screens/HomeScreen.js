@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Button} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, ActivityIndicator} from 'react-native';
 import {useTheme} from 'react-native-paper';
 import axios from 'axios';
 
@@ -8,6 +8,14 @@ import Carousel from 'react-native-snap-carousel';
 import HeaderApp from '../components/HeaderApp';
 import RenderRoom from '../components/RenderRoom';
 
+const Loading = () => {
+    return(
+        <ActivityIndicator style={{marginTop:200}} 
+        size="large" color="red"/>
+    )
+}
+
+
 const HomeScreen = ({navigation}) => {
 
     const {colors} = useTheme();
@@ -15,18 +23,25 @@ const HomeScreen = ({navigation}) => {
 
     const [rooms, setRooms] = useState([]);
     const [promotions, setPromotions] = useState([]);
+    const [loading,setLoading] = useState(false);
+
     
+
+    if(loading) return <Loading/>
+
     const getRoom = async () => {
+       
        let rooms = await axios.get('https://dreamerhotel.herokuapp.com/rooms');
     //    console.log(rooms);
        setRooms(rooms.data);
+ 
     }
 
     const getPromotion = async () => {
         let promotions = await axios.get('https://dreamerhotel.herokuapp.com/promotions');
         // console.log(promotions.data);
         setPromotions(promotions.data);
-
+        
     }
 
     useEffect(() => {
