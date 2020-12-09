@@ -5,6 +5,7 @@ import {useTheme} from 'react-native-paper'
 
 import RenderListRoom from '../components/RenderListRoom';
 import HeaderScreen from '../components/HeaderScreen';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function CategoryRoomScreen({route, navigation}) {
     const {rooms, promotions} = route.params;
@@ -20,7 +21,7 @@ export default function CategoryRoomScreen({route, navigation}) {
         }
     });
     return (
-        <View style={{flex: 1}}>
+        <SafeAreaView style={{flex: 1}}>
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Ionicon name="arrow-back" size={30} style={styles.icon}/>
@@ -33,6 +34,6 @@ export default function CategoryRoomScreen({route, navigation}) {
             />
             {/* <Button title="haha" onPress={() => console.log(rooms)}/> */}
 
-        </View>
+        </SafeAreaView>
     )
 }
