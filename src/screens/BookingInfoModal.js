@@ -4,6 +4,7 @@ import Modal from 'react-native-modal';
 import {useTheme} from 'react-native-paper';
 import DropdownPicker from 'react-native-dropdown-picker';
 import NumericInput from 'react-native-numeric-input';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
 
 import TextInputInfo from '../components/TextInputInfo';
@@ -11,7 +12,6 @@ import TextInputInfo from '../components/TextInputInfo';
 export default function BookingInfoModal({
     toggleModalInfo, 
     isModalInfoVisible, 
-    toggleModalSuccess, 
     toggleModal, 
     _handleLoaiKhach,
     _handleSoluongKhach,
@@ -80,7 +80,17 @@ export default function BookingInfoModal({
                             justifyContent: 'center'
                         }}
                     >
-                        <TextInputInfo lable={'Họ Tên'} value={userName} _handleText={setUserName}/>
+                            <TouchableOpacity 
+                                onPress={() => toggleModalInfo()}
+                                style={{
+                                    alignSelf: 'flex-end', 
+                                    marginBottom: 10, 
+                                    marginRight: 5
+                                }}
+                            >
+                                <FontAwesome name="close" size={30} style={{color: 'white'}}/>
+                            </TouchableOpacity>
+                            <TextInputInfo lable={'Họ Tên'} value={userName} _handleText={setUserName}/>
                             <TextInputInfo lable={'SĐT'} value={userPhone} _handleText={setUserPhone}/>
                             <TextInputInfo lable={'CMND'} value={userCMND} _handleText={setUserCMND}/>
                             <TextInputInfo lable={'Địa chỉ'} value={userAddress} _handleText={setUserAddress}/>
@@ -111,15 +121,19 @@ export default function BookingInfoModal({
                                         value={soLuongKhach}
                                         totalHeight={40}
                                         onChange={(value) => _handleSoluongKhach(value)}
+                                        minValue={1}
+                                        maxValue={3}
                                     />
                                 </View>
                             </View>
                             <TouchableOpacity 
                                 onPress={() => {
-                                    toggleModalInfo();
-                                    toggleModal();
-                                    _handleHaveInfo();
-                                   _postReservation();
+                                    if(userName !== '' && userPhone !== '' && userCMND !== '' && userAddress !== '' && soLuongKhach > 0) {
+                                        toggleModalInfo();
+                                        toggleModal();
+                                        _handleHaveInfo();
+                                        _postReservation();
+                                    }         
                                 }}
                                 style={{
                                     alignSelf: 'center', 
